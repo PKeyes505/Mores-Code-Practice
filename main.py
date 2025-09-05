@@ -33,7 +33,7 @@ def main():
                 continue
             if text.lower() == EXIT_COMMAND.lower():
                 break
-            if text.lower().startswith("/practice1"):
+            if text.lower().startswith("/practice1") or text.lower().startswith("/p1"):
                 parts = text.strip().split()
                 if len(parts) > 1 and parts[1].isdigit():
                     num_chars = int(parts[1])
