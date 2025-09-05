@@ -39,6 +39,7 @@ def main():
                     num_chars = int(parts[1])
                 else:
                     num_chars = 5
+                print(f"Starting practice1 mode with {num_chars} characters.")  # Debug print
                 practice1_mode(unit_s, num_chars)
                 continue
             if text.lower().startswith("/practice"):
