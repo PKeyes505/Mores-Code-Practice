@@ -16,6 +16,15 @@ def make_tone_buffer(freq_hz, duration_sec, volume, sample_rate):
     n_samples = max(1, int(duration_sec * sample_rate))
     t = np.arange(n_samples) / sample_rate
     wave = np.sin(2 * np.pi * freq_hz * t)
+
+    # Fade-in/out (5 ms each)
+    fade_len = int(0.005 * sample_rate)
+    envelope = np.ones(n_samples)
+    if fade_len * 2 < n_samples:
+        envelope[:fade_len] = np.linspace(0, 1, fade_len)
+        envelope[-fade_len:] = np.linspace(1, 0, fade_len)
+    wave *= envelope
+
     audio = (wave * (32767 * max(0.0, min(1.0, volume)))).astype(np.int16)
     return pygame.mixer.Sound(buffer=audio.tobytes())
 
