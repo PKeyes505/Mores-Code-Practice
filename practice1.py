@@ -8,7 +8,7 @@ EXIT_COMMAND = "/quit"
 def practice_mode(unit_s, num_chars=5):
     chars = string.ascii_uppercase + string.digits
     print(f"\nPractice Mode: Type back the {num_chars} characters you hear in Morse.")
-    print("Type /r to repeat, /n for next, or /quit to exit.\n")
+    print("Type /r to repeat, /n for next (shows answer), or /quit to exit.\n")
 
     running = True
     while running:
@@ -25,6 +25,8 @@ def practice_mode(unit_s, num_chars=5):
                 play_morse(morse, unit_s)
                 continue
             elif answer == "/N":
+                print(f"Morse code: {morse}")
+                print(f"Characters: {seq}")
                 break
             elif answer == seq:
                 print("Correct!\n")
