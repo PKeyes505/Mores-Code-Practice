@@ -16,6 +16,8 @@ def seconds_per_unit(wpm):
     return 1.2 / float(wpm)
 
 def main():
+    global WPM  # Declare global before assignment
+    unit_s = seconds_per_unit(WPM)
     import pygame
     pygame.init()
     mixer.init(frequency=SAMPLE_RATE, size=-16, channels=1, buffer=512)
@@ -33,6 +35,15 @@ def main():
                 continue
             if text.lower() == EXIT_COMMAND.lower():
                 break
+            if text.lower().startswith("/s "):
+                parts = text.strip().split()
+                if len(parts) > 1 and parts[1].isdigit():
+                    WPM = int(parts[1])  # Changes global WPM
+                    unit_s = seconds_per_unit(WPM)
+                    print(f"Speed changed to {WPM} WPM.")
+                else:
+                    print("Usage: /s <wpm>")
+                continue
             if text.lower().startswith("/practice1") or text.lower().startswith("/p1"):
                 parts = text.strip().split()
                 if len(parts) > 1 and parts[1].isdigit():
