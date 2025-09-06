@@ -3,8 +3,9 @@ from pygame import mixer
 from audio import play_morse
 from morse_utils import encode_to_morse
 from practice import practice_mode
-from practice1 import practice_mode as practice1_mode  # Add this import
+from practice1 import practice_mode as practice1_mode
 
+# Configuration
 TONE_FREQ_HZ = 528
 WPM = 20
 VOLUME = 0.5
@@ -15,9 +16,27 @@ TEXT_PROMPT = "Enter text (or /quit): "
 def seconds_per_unit(wpm):
     return 1.2 / float(wpm)
 
+def handle_speed_command(parts):
+    global WPM
+    if len(parts) > 1 and parts[1].isdigit():
+        WPM = int(parts[1])
+        print(f"Speed changed to {WPM} WPM.")
+        return seconds_per_unit(WPM)
+    else:
+        print("Usage: /s <wpm>")
+        return seconds_per_unit(WPM)
+
+def handle_practice_command(parts, unit_s):
+    num_chars = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 5
+    practice_mode(unit_s, num_chars)
+
+def handle_practice1_command(parts, unit_s):
+    num_chars = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 5
+    print(f"Starting practice1 mode with {num_chars} characters.")
+    practice1_mode(unit_s, num_chars)
+
 def main():
-    global WPM  # Declare global before assignment
-    unit_s = seconds_per_unit(WPM)
+    global WPM
     import pygame
     pygame.init()
     mixer.init(frequency=SAMPLE_RATE, size=-16, channels=1, buffer=512)
@@ -42,37 +61,24 @@ def main():
                 continue
             if text.lower() == EXIT_COMMAND.lower():
                 break
-            if text.lower().startswith("/s "):
-                parts = text.strip().split()
-                if len(parts) > 1 and parts[1].isdigit():
-                    WPM = int(parts[1])  # Changes global WPM
-                    unit_s = seconds_per_unit(WPM)
-                    print(f"Speed changed to {WPM} WPM.")
-                else:
-                    print("Usage: /s <wpm>")
+
+            parts = text.split()
+            cmd = parts[0].lower()
+
+            if cmd == "/s":
+                unit_s = handle_speed_command(parts)
                 continue
-            if text.lower().startswith("/practice1") or text.lower().startswith("/p1"):
-                parts = text.strip().split()
-                if len(parts) > 1 and parts[1].isdigit():
-                    num_chars = int(parts[1])
-                else:
-                    num_chars = 5
-                print(f"Starting practice1 mode with {num_chars} characters.")  # Debug print
-                practice1_mode(unit_s, num_chars)
+            elif cmd in ("/practice",):
+                handle_practice_command(parts, unit_s)
                 continue
-            if text.lower().startswith("/practice"):
-                parts = text.strip().split()
-                if len(parts) > 1 and parts[1].isdigit():
-                    num_chars = int(parts[1])
-                else:
-                    num_chars = 5
-                practice_mode(unit_s, num_chars)
+            elif cmd in ("/practice1", "/p1"):
+                handle_practice1_command(parts, unit_s)
                 continue
 
             morse = encode_to_morse(text)
             print(f"Morse: {morse}")
             play_morse(morse, unit_s)
-            last_text = text  # Store last non-command input
+            last_text = text
 
     except KeyboardInterrupt:
         pass
