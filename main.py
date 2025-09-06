@@ -26,12 +26,19 @@ def main():
     print(f"Type {EXIT_COMMAND} to exit.\n")
 
     try:
+        last_text = ""
         while True:
             text = input(TEXT_PROMPT)
             if text is None:
                 continue
             text = text.strip()
             if not text:
+                # Replay last text if available
+                if last_text:
+                    morse = encode_to_morse(last_text)
+                    print(f"Replaying: {last_text}")
+                    print(f"Morse: {morse}")
+                    play_morse(morse, unit_s)
                 continue
             if text.lower() == EXIT_COMMAND.lower():
                 break
@@ -65,6 +72,7 @@ def main():
             morse = encode_to_morse(text)
             print(f"Morse: {morse}")
             play_morse(morse, unit_s)
+            last_text = text  # Store last non-command input
 
     except KeyboardInterrupt:
         pass
