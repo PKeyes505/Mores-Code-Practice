@@ -1,9 +1,10 @@
 import sys
 from pygame import mixer
-from audio import play_morse
+from audio_pygame import play_morse
 from morse_utils import encode_to_morse
 from practice import practice_mode
 from practice1 import practice_mode as practice1_mode
+from practice_words.mode import practice_mode as practice_words_mode
 
 # Configuration
 TONE_FREQ_HZ = 528
@@ -34,6 +35,23 @@ def handle_practice1_command(parts, unit_s):
     num_chars = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 5
     print(f"Starting practice1 mode with {num_chars} characters.")
     practice1_mode(unit_s, num_chars)
+def handle_practice_words_command(parts, unit_s):
+    """
+    Usage:
+      /practice_words <csv_path> [rounds]
+      /pw <csv_path> [rounds]
+    If rounds is provided, stop after that many prompts.
+    """
+    if len(parts) < 2:
+        csv_path = input("Enter path to CSV file: ").strip()
+    else:
+        csv_path = parts[1]
+    limit = None
+    if len(parts) > 2 and parts[2].isdigit():
+        limit = int(parts[2])
+    print(f"Starting practice_words mode using {csv_path} ...")
+    practice_words_mode(unit_s, csv_path, limit)
+
 
 def main():
     global WPM
@@ -73,6 +91,9 @@ def main():
                 continue
             elif cmd in ("/practice1", "/p1"):
                 handle_practice1_command(parts, unit_s)
+                continue
+            elif cmd in ("/practice_words", "/pw"):
+                handle_practice_words_command(parts, unit_s)
                 continue
 
             morse = encode_to_morse(text)

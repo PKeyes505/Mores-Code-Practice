@@ -2,7 +2,7 @@ import pygame
 import random
 import string
 from morse_utils import encode_to_morse
-from audio import play_morse
+from audio_pygame import play_morse
 
 EXIT_COMMAND = "/quit"
 
