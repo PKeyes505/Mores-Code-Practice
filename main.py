@@ -35,6 +35,7 @@ def handle_practice1_command(parts, unit_s):
     num_chars = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 5
     print(f"Starting practice1 mode with {num_chars} characters.")
     practice1_mode(unit_s, num_chars)
+    
 def handle_practice_words_command(parts, unit_s):
     """
     Usage:

@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 import time
 
-TONE_FREQ_HZ = 528
+TONE_FREQ_HZ = 350
 VOLUME = 0.5
 SAMPLE_RATE = 44100
 
