@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 # --- Python ---
+=======
+# Byte-compiled / optimized / DLL files
+>>>>>>> 56568d9579da9d9cf0482b8b6efcab385141c7ce
 __pycache__/
 *.py[cod]
 *$py.class
 
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 *.pyo
 *.pyd
@@ -13,6 +18,14 @@ __pycache__/
 env/
 venv/
 .venv/
+=======
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# Distribution / packaging
+>>>>>>> 56568d9579da9d9cf0482b8b6efcab385141c7ce
 build/
 develop-eggs/
 dist/
@@ -24,12 +37,27 @@ lib64/
 parts/
 sdist/
 var/
+<<<<<<< HEAD
 *.egg-info/
 .installed.cfg
 *.egg
 pip-wheel-metadata/
 MANIFEST
 
+=======
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+>>>>>>> 56568d9579da9d9cf0482b8b6efcab385141c7ce
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -44,6 +72,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
+<<<<<<< HEAD
 # --- IDEs & Editors ---
 .vscode/
 .idea/
@@ -84,3 +113,35 @@ data/dictionaries/*
 
 # --- OS junk ---
 *.DS_Store
+=======
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Pycharm
+.idea/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+
+# Local settings
+.env.local
+>>>>>>> 56568d9579da9d9cf0482b8b6efcab385141c7ce
