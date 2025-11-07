@@ -1,0 +1,86 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Byte-compiled / optimized / DLL files
+*.pyo
+*.pyd
+*.pdb
+
+# Distribution / packaging
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
+MANIFEST
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+
+# --- Environment & config ---
+.env
+.env.*
+*.sqlite
+*.db
+
+# --- Logs ---
+*.log
+
+# --- Data ---
+# Saved session data (local progress)
+~/.yomucoach/
+data/dictionaries/*
+!data/sample_story.txt
+
+# --- Build outputs ---
+*.out
+*.pdf
+*.docx
+*.xlsx
+*.csv
+*.jsonl
+*.json
+
+# --- Jupyter / temp ---
+.ipynb_checkpoints
+*.ipynb
+
+# --- OS junk ---
+*.DS_Store
